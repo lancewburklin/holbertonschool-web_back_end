@@ -10,4 +10,5 @@ async def measure_runtime() -> float:
     t0 = time.time()
     await asyncio.gather(a(), a(), a(), a())
     t1 = time.time()
+    res: float = t1 - t0
     return (t1 - t0)
