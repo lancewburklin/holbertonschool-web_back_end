@@ -20,9 +20,12 @@ class FIFOCache(BaseCaching):
                 self.cache_data[key] = item
             else:
                 items = list(self.cache_data.keys())
-                print("DISCARD: " + items[0])
-                del self.cache_data[items[0]]
-                self.cache_data[key] = item
+                if key in items:
+                    self.cache_data[key] = item
+                else:
+                    print("DISCARD: " + items[0])
+                    del self.cache_data[items[0]]
+                    self.cache_data[key] = item
 
     def get(self, key):
         """
