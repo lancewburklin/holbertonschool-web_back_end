@@ -28,9 +28,12 @@ class LRUCache(BaseCaching):
                 for lock, val in self.order.items():
                     if val > self.order[key]:
                         self.order[lock] = val - 1
-                num = max(list(self.order.values())) + 1
-                self.order[key] = num
+                if len(self.order) < self.MAX_ITEMS:
+                    self.order[key] = max(list(self.order.values())) + 1
+                else:
+                    self.order[key] = self.MAX_ITEMS
                 self.cache_data[key] = item
+                print(self.order)
                 return
             if len(self.cache_data) < BaseCaching.MAX_ITEMS:
                 self.cache_data[key] = item
