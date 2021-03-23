@@ -2,6 +2,9 @@ import csv
 import math
 from typing import List
 index_range = __import__('0-simple_helper_function').index_range
+"""
+Simple pagination list
+"""
 
 
 class Server:
@@ -24,6 +27,7 @@ class Server:
         return self.__dataset
 
     def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
+        """ Get the requested pages """
         assert type(page) == int
         assert type(page_size) == int
         assert page > 0
