@@ -14,6 +14,7 @@ class Server:
     DATA_FILE = "Popular_Baby_Names.csv"
 
     def __init__(self):
+        """ Inititalizing class """
         self.__dataset = None
 
     def dataset(self) -> List[List]:
@@ -34,9 +35,9 @@ class Server:
         assert page > 0
         assert page_size > 0
         data: List = []
-        items = list(index_range(page, page_size))
+        items: Tuple = (index_range(page, page_size))
         allData = self.dataset()
-        i = items[0]
+        i: int = items[0]
         while i != items[1] and i < len(allData):
             data.append(allData[i])
             i += 1
