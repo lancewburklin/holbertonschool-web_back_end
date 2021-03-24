@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-import csv
-import math
-from typing import List
-index_range = __import__('0-simple_helper_function').index_range
 """
 Simple pagination list
 """
+import csv
+import math
+from typing import List, Tuple
+index_range = __import__('0-simple_helper_function').index_range
 
 
 class Server:
