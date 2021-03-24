@@ -4,7 +4,7 @@ Simple pagination list
 """
 import csv
 import math
-from typing import List, Dict
+from typing import List, Tuple
 index_range = __import__('0-simple_helper_function').index_range
 
 
@@ -43,10 +43,10 @@ class Server:
             i += 1
         return data
 
-    def get_hyper(self, page: int = 1, page_size: int = 10) -> Dict:
+    def get_hyper(self, page: int = 1, page_size: int = 10) -> dict:
         """ Getting pages with additional info """
         data = self.get_page(page, page_size)
-        hyper: Dict = {}
+        hyper: dict = {}
         hyper['page_size'] = len(data)
         hyper['page'] = page
         hyper['data'] = data
@@ -61,5 +61,5 @@ class Server:
             hyper['prev-page'] = None
         else:
             hyper['prev-page'] = page - 1
-        hyper['total_pages'] = int(len(self.dataset()) / page_size)
+        hyper['total_pages'] = math.ceil(len(self.dataset()) / page_size)
         return hyper
