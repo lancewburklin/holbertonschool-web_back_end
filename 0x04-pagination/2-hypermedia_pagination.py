@@ -55,8 +55,8 @@ class Server:
         else:
             hyper['next_page'] = None
         if (page - 1) * page_size:
-            hyper['prev-page'] = page - 1
+            hyper['prev_page'] = page - 1
         else:
-            hyper['prev-page'] = None
+            hyper['prev_page'] = None
         hyper['total_pages'] = math.ceil(len(self.dataset()) / page_size)
         return hyper
