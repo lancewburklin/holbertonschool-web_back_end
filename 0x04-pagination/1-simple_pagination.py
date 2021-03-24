@@ -27,7 +27,7 @@ class Server:
 
         return self.__dataset
 
-    def get_page(self, page: int = 1, page_size: int = 10) -> List:
+    def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
         """ Get the requested pages """
         assert type(page) == int
         assert type(page_size) == int
@@ -36,12 +36,8 @@ class Server:
         data: List = []
         items = list(index_range(page, page_size))
         allData = self.dataset()
-        if (items[0] > len(allData)):
-            return data
-        if (items[1] > len(allData)):
-            items[1] = len(allData)
         i = items[0]
-        while i != items[1]:
+        while i != items[1] and i < len(allData):
             data.append(allData[i])
             i += 1
         return data
