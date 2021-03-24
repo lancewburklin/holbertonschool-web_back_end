@@ -34,17 +34,14 @@ class Server:
         assert page > 0
         assert page_size > 0
         data: List = []
-        items = index_range(page, page_size)
+        items = list(index_range(page, page_size))
         allData = self.dataset()
         if (items[0] > len(allData)):
             return data
         if (items[1] > len(allData)):
             items[1] = len(allData)
         i = items[0]
-        while i < items[1]:
-            onePage = []
-            while len(onePage) != page_size:
-                onePage.append(allData[i])
-                i += 1
-            data.append(onePage)
-        return data[0]
+        while i != items[1]:
+            data.append(allData[i])
+            i += 1
+        return data
