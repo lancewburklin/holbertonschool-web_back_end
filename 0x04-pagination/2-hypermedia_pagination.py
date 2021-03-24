@@ -50,12 +50,9 @@ class Server:
         hyper['page_size'] = len(data)
         hyper['page'] = page
         hyper['data'] = data
-        try:
-            if len(self.get_page(page + 1, page_size)) != 0:
-                hyper['next_page'] = page + 1
-            else:
-                hyper['next_page'] = None
-        except AssertionError:
+        if (page + 1) * page_size <= len(self.dataset()):
+            hyper['next_page'] = page + 1
+        else:
             hyper['next_page'] = None
         if (page == 1):
             hyper['prev-page'] = None
