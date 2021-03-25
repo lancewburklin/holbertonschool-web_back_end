@@ -9,6 +9,5 @@ import logging
 def filter_datum(fields, redaction, message, separator):
     """ Filter a message """
     for i in fields:
-        message = re.sub('(?s)(?<={}=).*?(?={})'.format(i, separator),
-                         redaction, message)
+        message = re.sub(f'(?<={i}=).*?(?={separator})', redaction, message)
     return message
