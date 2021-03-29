@@ -7,6 +7,9 @@ import logging
 from typing import List
 
 
+PII_FIELDS = ('name', 'phone', 'ssn', 'password', 'email')
+
+
 class RedactingFormatter(logging.Formatter):
     """ Redacting Formatter class
         """
@@ -42,10 +45,7 @@ def get_logger() -> logging.Logger:
     user_data.propagate = False
     user_data.setLevel(logging.INFO)
     stream_h = logging.StreamHandler()
-    stream_h.Formatter(RedactingFormatter)
+    stream_h.Formatter(RedactingFormatter(list(PII_FIELDS)))
     stream_h.setLevel(logging.ERROR)
     user_data.addHandler(stream_h)
     return user_data
-
-
-PII_FIELDS = ('name', 'phone', 'ssn', 'password', 'email')
