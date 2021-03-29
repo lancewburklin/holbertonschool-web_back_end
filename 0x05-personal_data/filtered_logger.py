@@ -5,6 +5,8 @@ Logging obfuscated info
 import re
 import logging
 from typing import List
+import mysql.connector
+import os
 PII_FIELDS = ('name', 'phone', 'ssn', 'password', 'email')
 
 
@@ -47,3 +49,19 @@ def get_logger() -> logging.Logger:
     stream_h.setLevel(logging.INFO)
     user_data.addHandler(stream_h)
     return user_data
+
+
+def get_db() -> mysql.connector.connection.MySQLConnection:
+    """ Connecting to mysql """
+    uName = os.environ['PERSONAL_DATA_DB_USERNAME'] or 'root'
+    uPass = os.environ['PERSONAL_DATA_DB_PASSWORD'] or ""
+    dHost = os.environ['PERSONAL_DATA_DB_HOST'] or 'localhost'
+    dName = os.environ['PERSONAL_DATA_DB_NAME']
+    mydb = mysql.connector.connect(
+        host=dHost,
+        user=uName,
+        password=uPass,
+        database=dName
+    )
+    print(mydb)
+    return mydb
