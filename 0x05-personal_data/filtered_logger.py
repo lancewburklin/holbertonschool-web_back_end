@@ -40,8 +40,10 @@ def get_logger() -> logging.Logger:
     """ Create the Logger """
     user_data = logging.getLogger('user_data')
     user_data.propagate = False
+    user_data.setLevel(logging.INFO)
     stream_h = logging.StreamHandler()
     stream_h.Formatter(RedactingFormatter)
+    stream_h.setLevel(logging.ERROR)
     user_data.addHandler(stream_h)
     return user_data
 
