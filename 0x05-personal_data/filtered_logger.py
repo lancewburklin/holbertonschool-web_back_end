@@ -5,8 +5,6 @@ Logging obfuscated info
 import re
 import logging
 from typing import List
-
-
 PII_FIELDS = ('name', 'phone', 'ssn', 'password', 'email')
 
 
