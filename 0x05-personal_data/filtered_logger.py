@@ -63,5 +63,4 @@ def get_db() -> mysql.connector.connection.MySQLConnection:
         password=uPass,
         database=dName
     )
-    print(mydb)
     return mydb
