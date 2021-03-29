@@ -37,7 +37,7 @@ def filter_datum(fields: List[str], redaction: str,
 
 def get_logger() -> logging.Logger:
     """ Create the Logger """
-    user_data = logging.Logger('user_data')
+    user_data = logging.getLogger('user_data')
     user_data.propagate = False
     stream_h = logging.StreamHandler()
     stream_h.Formatter(RedactingFormatter)
