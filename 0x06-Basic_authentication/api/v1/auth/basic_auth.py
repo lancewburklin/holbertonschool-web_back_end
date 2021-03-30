@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 """ Authorizing users """
 from .auth import Auth
+from typing import TypeVar
+from models.user import User
 import base64
 
 
@@ -48,3 +50,18 @@ class BasicAuth(Auth):
         parts = de.split(":")
         creds2 = (parts[0], parts[1])
         return creds2
+
+    def user_object_from_credentials(self,
+                                     user_email: str,
+                                     user_pwd: str) -> TypeVar('User'):
+        if user_email is None:
+            return None
+        if user_pwd is None:
+            return None
+        person = User.search({'email': user_email})
+        if person is None:
+            return None
+        for per in person:
+            if per.is_valid_password(user_pwd):
+                return per
+        return None
