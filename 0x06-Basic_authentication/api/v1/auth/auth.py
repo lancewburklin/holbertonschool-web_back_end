@@ -32,8 +32,13 @@ class Auth():
         return True
 
     def authorization_header(self, request=None) -> str:
-        """ Authorization Header """
-        return None
+        """ Check if header has key """
+        if request is None:
+            return None
+        keys = request.headers
+        if keys.get('Authorization') is None:
+            return None
+        return keys.get('Authorization')
 
     def current_user(self, request=None) -> TypeVar('User'):
         """ Get the current user """
