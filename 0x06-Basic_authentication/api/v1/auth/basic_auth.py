@@ -28,12 +28,14 @@ class BasicAuth(Auth):
         if type(base64_authorization_header) is not str:
             return None
         try:
-            if base64.b64decode(base64_authorization_header):
+            tf = base64_authorization_header
+            if base64.b64encode(base64.b64decode(tf)) == tf:
                 pass
-            pass
         except Exception:
             return None
-        return base64.b64decode(base64_authorization_header).decode('utf-8')
+        base = base64.b64decode(base64_authorization_header)
+        print(base)
+        return base.decode('utf-8')
 
     def extract_user_credentials(self,
                                  decoded_base64_authorization_header:
@@ -49,11 +51,13 @@ class BasicAuth(Auth):
             return creds
         parts = de.split(":")
         creds2 = (parts[0], parts[1])
+        print(creds2)
         return creds2
 
     def user_object_from_credentials(self,
                                      user_email: str,
                                      user_pwd: str) -> TypeVar('User'):
+        """ Check for user """
         if user_email is None:
             return None
         if user_pwd is None:
@@ -65,3 +69,16 @@ class BasicAuth(Auth):
             if per.is_valid_password(user_pwd):
                 return per
         return None
+
+    def current_user(self, request=None) -> TypeVar('User'):
+        """ Define the current user """
+        creds = self.authorization_header(request)
+        print(creds)
+        creds = self.extract_base64_authorization_header(creds)
+        print(creds)
+        creds = self.decode_base64_authorization_header(creds)
+        print(creds)
+        creds = self.extract_user_credentials(creds)
+        print(creds)
+        player = self.user_object_from_credentials(creds[0], creds[1])
+        return player
