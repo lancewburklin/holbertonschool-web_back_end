@@ -28,14 +28,11 @@ class BasicAuth(Auth):
         if type(base64_authorization_header) is not str:
             return None
         try:
-            tf = base64_authorization_header
-            if base64.b64encode(base64.b64decode(tf)) == tf:
-                pass
+            base = base64_authorization_header
+            base = base64.b64decode(base64_authorization_header)
+            return base.decode('utf-8')
         except Exception:
             return None
-        base = base64.b64decode(base64_authorization_header)
-        print(base)
-        return base.decode('utf-8')
 
     def extract_user_credentials(self,
                                  decoded_base64_authorization_header:
@@ -73,12 +70,8 @@ class BasicAuth(Auth):
     def current_user(self, request=None) -> TypeVar('User'):
         """ Define the current user """
         creds = self.authorization_header(request)
-        print(creds)
         creds = self.extract_base64_authorization_header(creds)
-        print(creds)
         creds = self.decode_base64_authorization_header(creds)
-        print(creds)
         creds = self.extract_user_credentials(creds)
-        print(creds)
         player = self.user_object_from_credentials(creds[0], creds[1])
         return player
