@@ -64,7 +64,7 @@ class BasicAuth(Auth):
             return None
         if type(user_email) is not str:
             return None
-        if User.count == 0:
+        if User.count() == 0:
             return None
         person = User.search({'email': user_email})
         if person is True or person is False or len(person) == 0:
