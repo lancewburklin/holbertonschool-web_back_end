@@ -3,6 +3,7 @@
 from .auth import Auth
 from typing import TypeVar
 from models.user import User
+from models.base import DATA
 import base64
 
 
@@ -64,11 +65,9 @@ class BasicAuth(Auth):
             return None
         if type(user_email) is not str:
             return None
-        if User.count() == 0:
+        if not DATA.get("User"):
             return None
         person = User.search({'email': user_email})
-        if person is True or person is False or len(person) == 0:
-            return None
         for per in person:
             if per.is_valid_password(user_pwd):
                 return per
