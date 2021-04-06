@@ -4,4 +4,5 @@ from .auth import Auth
 
 
 class SessionAuth(Auth):
+    """ Session Auth class """
     pass
