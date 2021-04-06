@@ -47,8 +47,9 @@ class BasicAuth(Auth):
         if ':' not in de:
             return creds
         parts = de.split(":")
+        if parts is None:
+            return creds
         creds2 = (parts[0], parts[1])
-        print(creds2)
         return creds2
 
     def user_object_from_credentials(self,
@@ -58,6 +59,8 @@ class BasicAuth(Auth):
         if user_email is None:
             return None
         if user_pwd is None:
+            return None
+        if User.count == 0:
             return None
         person = User.search({'email': user_email})
         if person is None:
