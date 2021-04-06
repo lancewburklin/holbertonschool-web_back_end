@@ -60,6 +60,10 @@ class BasicAuth(Auth):
             return None
         if user_pwd is None:
             return None
+        if type(user_pwd) is not str:
+            return None
+        if type(user_email) is not str:
+            return None
         if User.count == 0:
             return None
         person = User.search({'email': user_email})
