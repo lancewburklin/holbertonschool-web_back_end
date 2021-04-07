@@ -17,3 +17,12 @@ class SessionAuth(Auth):
         sess = str(uuid.uuid4())
         self.user_id_by_session_id[sess] = user_id
         return sess
+
+    def user_id_for_session_id(self, session_id: str = None) -> str:
+        if session_id is None:
+            return None
+        if session_id is not str:
+            return None
+        pirnt(self.user_id_by_session_id.get(session_id))
+        print("CHEEEEEEEEEEESE")
+        return self.user_id_by_session_id.get(session_id)
