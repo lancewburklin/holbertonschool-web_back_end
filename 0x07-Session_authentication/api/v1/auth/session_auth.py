@@ -2,6 +2,7 @@
 """ Session Authentication """
 from .auth import Auth
 import uuid
+from models.user import User
 
 
 class SessionAuth(Auth):
@@ -25,3 +26,15 @@ class SessionAuth(Auth):
         if type(session_id) is not str:
             return None
         return self.user_id_by_session_id.get(session_id)
+
+    def current_user(self, request=None):
+        """ Overload the current user """
+        if request is None:
+            return None
+        cook = self.session_cookie(request)
+        if cook is None:
+            return None
+        the_id = self.user_id_by_session_id.get(cook)
+        if the_id is None:
+            return None
+        return User.get(the_id)
