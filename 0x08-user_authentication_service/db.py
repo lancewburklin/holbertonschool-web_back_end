@@ -37,6 +37,7 @@ class DB:
         return newUser
 
     def find_user_by(self, **kwargs) -> User:
+        """ Find a user based of attribute """
         users = self._session.query(User).filter_by(**kwargs).all()
         if len(users) == 0:
             raise NoResultFound
