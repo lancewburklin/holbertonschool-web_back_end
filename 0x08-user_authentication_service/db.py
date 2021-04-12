@@ -5,6 +5,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm.exc import NoResultFound
 from sqlalchemy.exc import InvalidRequestError
+from sqlalchemy import update
 from user import User
 
 from user import Base
@@ -42,3 +43,10 @@ class DB:
         else:
             return users[0]
         raise NoResultFound
+
+    def update_user(self, userId: int, **kwargs) -> None:
+        per = self.find_user_by(id=userId)
+        for k, v in kwargs.items():
+            setattr(per, k, v)
+        self._session.commit()
+        return None
