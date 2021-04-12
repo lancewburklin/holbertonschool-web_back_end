@@ -45,6 +45,7 @@ class DB:
         raise NoResultFound
 
     def update_user(self, userId: int, **kwargs) -> None:
+        """ Update the user """
         per = self.find_user_by(id=userId)
         for k, v in kwargs.items():
             if not hasattr(per, k):
