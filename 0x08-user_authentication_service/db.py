@@ -50,6 +50,9 @@ class DB:
         for k, v in kwargs.items():
             if not hasattr(per, k):
                 raise ValueError
+            if k == "email" or k == "hashed_password":
+                if v is None or v == "":
+                    raise ValueError
             setattr(per, k, v)
         self._session.commit()
         return None
