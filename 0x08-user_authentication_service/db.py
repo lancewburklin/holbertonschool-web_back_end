@@ -47,7 +47,7 @@ class DB:
     def update_user(self, userId: int, **kwargs) -> None:
         per = self.find_user_by(id=userId)
         for k, v in kwargs.items():
-            if not hasattr(user, k):
+            if not hasattr(per, k):
                 raise ValueError
             setattr(per, k, v)
         self._session.commit()
