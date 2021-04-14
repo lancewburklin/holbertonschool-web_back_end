@@ -45,15 +45,12 @@ class DB:
             return users[0]
         raise NoResultFound
 
-    def update_user(self, userId: int, **kwargs) -> None:
+    def update_user(self, user_id: int, **kwargs) -> None:
         """ Update the user """
-        per = self.find_user_by(id=userId)
+        per = self.find_user_by(id=user_id)
         for k, v in kwargs.items():
             if not hasattr(per, k):
                 raise ValueError
-            if k == "email" or k == "hashed_password":
-                if v is None or v == "":
-                    raise ValueError
             setattr(per, k, v)
         self._session.commit()
         return None
