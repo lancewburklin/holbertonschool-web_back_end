@@ -3,7 +3,7 @@
 import bcrypt
 from db import DB
 from user import User
-from uuid import uuid4
+import uuid
 from sqlalchemy.orm.exc import NoResultFound
 
 
@@ -45,4 +45,4 @@ class Auth:
 
     def _generate_uuid() -> str:
         """ Create a UUID """
-        return str(uuid4())
+        return str(uuid.uuid4())
