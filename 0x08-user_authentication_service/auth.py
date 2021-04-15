@@ -81,8 +81,8 @@ class Auth:
         """ Create a reset token """
         try:
             per = self._db.find_user_by(email=email)
+            toke = str(uuid.uuid4())
+            self._db.update_user(per.id, reset_token=toke)
+            return toke
         except Exception:
             raise ValueError
-        toke = str(uuid.uuid4())
-        self._db.update_user(per.id, reset_token=toke)
-        return toke
