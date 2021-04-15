@@ -73,7 +73,7 @@ class Auth:
         try:
             per = self._db.find_user_by(id=user_id)
             info = {"session_id": None}
-            self._db.update_user(user_id, **info)
+            self._db.update_user(per.id, **info)
             return None
         except NoResultFound:
             return None
