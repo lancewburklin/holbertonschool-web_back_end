@@ -72,7 +72,8 @@ class Auth:
         """ End the session """
         try:
             per = self._db.find_user_by(id=user_id)
-            self._db.update_user(user_id, session_id=None)
+            info = {"session_id": None}
+            self._db.update_user(user_id, **info)
             return None
         except NoResultFound:
             return None
