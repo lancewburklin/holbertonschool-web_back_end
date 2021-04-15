@@ -46,7 +46,6 @@ def logout():
     """ Log out by removing the session ID """
     session_id = request.cookies.get('session_id')
     per = AUTH.get_user_from_session_id(session_id)
-    print(per)
     if per is None:
         abort(403)
     AUTH.destroy_session(per.id)
