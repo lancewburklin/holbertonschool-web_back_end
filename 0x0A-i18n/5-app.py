@@ -2,7 +2,7 @@
 """ Basic Flask app """
 from flask import Flask
 from flask import render_template, request, g
-from flask_babel import Babel, _
+from flask_babel import Babel, _, gettext
 from typing import Dict
 app = Flask(__name__)
 babel = Babel(app)
@@ -59,13 +59,11 @@ def basic_route():
     home_header = _("Hello world!")
     user = g.user
     if user is not None:
-        logged_in_as = _("You are logged in as %(username)s." %
-                         {'username': user.get('name')})
-    not_logged_in = _("You are not logged in.")
-    if user is None:
-        res = not_logged_in
-    else:
+        logged_in_as = _('logged_in_as', username=user.get('name'))
         res = logged_in_as
+    else:
+        not_logged_in = gettext(u'not_logged_in')
+        res = not_logged_in
     return render_template('5-index.html', home_title=home_title,
                            home_header=home_header, log=res)
 

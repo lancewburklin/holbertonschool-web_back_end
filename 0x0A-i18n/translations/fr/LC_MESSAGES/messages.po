@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2021-04-21 11:34-0500\n"
-"PO-Revision-Date: 2021-04-21 11:34-0500\n"
+"POT-Creation-Date: 2021-04-21 12:42-0500\n"
+"PO-Revision-Date: 2021-04-21 12:43-0500\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: fr\n"
 "Language-Team: fr <LL@li.org>\n"
@@ -26,12 +26,11 @@ msgstr "Bienvenue chez Holberton"
 msgid "Hello world!"
 msgstr "Bonjour monde!"
 
-#: 5-app.py:61
-#, python-format
-msgid "You are logged in as %(username)s."
+#: 5-app.py:62
+msgid "logged_in_as"
 msgstr "Vous êtes connecté en tant que %(username)s."
 
-#: 5-app.py:62
-msgid "You are not logged in."
+#: 5-app.py:65
+msgid "not_logged_in"
 msgstr "Vous n'êtes pas connecté."
 
