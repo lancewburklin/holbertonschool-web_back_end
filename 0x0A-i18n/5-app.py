@@ -59,14 +59,12 @@ def basic_route():
     home_title = _("home_title")
     home_header = _("home_header")
     user = g.user
+    cheese = False
+    name = None
     if user is not None:
-        logged_in_as = _('logged_in_as', username=user.get('name'))
-        res = logged_in_as
-    else:
-        not_logged_in = gettext(u'not_logged_in')
-        res = not_logged_in
-    return render_template('5-index.html', home_title=home_title,
-                           home_header=home_header, log=res)
+        cheese = True
+        name = user.get('name')
+    return render_template('5-index.html', cheese=cheese, name=name)
 
 
 if __name__ == "__main__":
