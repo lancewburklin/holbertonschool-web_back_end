@@ -2,7 +2,7 @@
 """ Basic Flask app """
 from flask import Flask
 from flask import render_template, request, g
-from flask_babel import Babel, _, gettext
+from flask_babel import Babel
 from typing import Dict
 app = Flask(__name__)
 babel = Babel(app)
