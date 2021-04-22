@@ -56,8 +56,6 @@ def get_locale():
 @app.route('/', methods=['GET'])
 def basic_route():
     """ Basic route to index """
-    home_title = _("home_title")
-    home_header = _("home_header")
     user = g.user
     cheese = False
     name = None
