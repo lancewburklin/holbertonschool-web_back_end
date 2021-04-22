@@ -35,6 +35,7 @@ def get_user() -> Dict:
 
 
 class Config:
+    """ Config settings for Babel """
     LANGUAGES = ["en", "fr"]
     BABEL_DEFAULT_LOCALE = "en"
     BABEL_DEFAULT_TIMEZONE = "UTC"
@@ -55,8 +56,8 @@ def get_locale():
 @app.route('/', methods=['GET'])
 def basic_route():
     """ Basic route to index """
-    home_title = _("Welcome to Holberton")
-    home_header = _("Hello world!")
+    home_title = _("home_title")
+    home_header = _("home_header")
     user = g.user
     if user is not None:
         logged_in_as = _('logged_in_as', username=user.get('name'))
