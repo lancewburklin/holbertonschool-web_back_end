@@ -2,7 +2,7 @@
 """ Basic Flask app """
 from flask import Flask
 from flask import render_template, request, g
-from flask_babel import Babel, _, gettext
+from flask_babel import Babel
 from typing import Dict
 app = Flask(__name__)
 babel = Babel(app)
@@ -62,17 +62,13 @@ def get_locale():
 @app.route('/', methods=['GET'])
 def basic_route():
     """ Basic route to index """
-    home_title = _("home_title")
-    home_header = _("home_header")
     user = g.user
+    cheese = False
+    name = None
     if user is not None:
-        logged_in_as = _('logged_in_as', username=user.get('name'))
-        res = logged_in_as
-    else:
-        not_logged_in = gettext(u'not_logged_in')
-        res = not_logged_in
-    return render_template('6-index.html', home_title=home_title,
-                           home_header=home_header, log=res)
+        cheese = True
+        name = user.get('name')
+    return render_template('5-index.html', cheese=cheese, name=name)
 
 
 if __name__ == "__main__":
