@@ -3,7 +3,18 @@
 """
 import redis
 from uuid import uuid4
-from typing import Union, Callable
+from typing import Union, Callable, Optional
+from functools import wraps
+
+
+def count_calls(method: Callable) -> Callable:
+    """ Count calls decorator """
+    @wraps(method)
+    def inner(*args, **kwargs):
+        args[0]._redis.incr(method.__qualname__)
+        val = method(*args, **kwargs)
+        return val
+    return inner
 
 
 class Cache():
@@ -13,13 +24,14 @@ class Cache():
         self._redis = redis.Redis()
         self._redis.flushdb()
 
+    @count_calls
     def store(self, data: Union[str, bytes, int, float]) -> str:
         """ Store data with a random key """
         ranKey = str(uuid4())
         self._redis.mset({ranKey: data})
         return ranKey
 
-    def get(self, key: str, fn: Callable):
+    def get(self, key: str, fn: Optional[Callable] = None):
         """ Decode Redis item """
         item = self._redis.get(key)
         if fn is None:
