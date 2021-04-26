@@ -3,7 +3,7 @@
 """
 import redis
 from uuid import uuid4
-from typing import Union
+from typing import Union, Callable
 
 
 class Cache():
@@ -18,3 +18,10 @@ class Cache():
         ranKey = str(uuid4())
         self._redis.mset({ranKey: data})
         return ranKey
+
+    def get(self, key: str, fn: Callable):
+        """ Decode Redis item """
+        item = self._redis.get(key)
+        if fn is None:
+            return item
+        return fn(item)
