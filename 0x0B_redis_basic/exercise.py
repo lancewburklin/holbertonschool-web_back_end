@@ -10,10 +10,10 @@ from functools import wraps
 def count_calls(method: Callable) -> Callable:
     """ Count calls decorator """
     @wraps(method)
-    def inner(*args, **kwargs):
+    def inner(self, *args, **kwargs) -> str:
         """ Inner function for count """
-        args[0]._redis.incr(method.__qualname__)
-        val = method(*args, **kwargs)
+        self._redis.incr(method.__qualname__)
+        val = method(self, *args, **kwargs)
         return val
     return inner
 
