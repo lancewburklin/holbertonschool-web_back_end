@@ -39,7 +39,9 @@ class Cache():
         return fn(item)
 
     def get_str(self, key: str) -> str:
+        """ Get a string from Redis """
         return self.get(key, str)
 
     def get_int(self, key: str) -> int:
+        """ Get and integer from Redis """
         return self.get(key, int)
