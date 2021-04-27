@@ -11,6 +11,7 @@ def count_calls(method: Callable) -> Callable:
     """ Count calls decorator """
     @wraps(method)
     def inner(*args, **kwargs):
+        """ Inner function for count """
         args[0]._redis.incr(method.__qualname__)
         val = method(*args, **kwargs)
         return val
