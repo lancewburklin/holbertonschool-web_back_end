@@ -1,0 +1,2 @@
+// Delete documetns with match in mongodb
+db.school.deleteMany({"name": "Holberton school"})
