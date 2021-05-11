@@ -9,5 +9,6 @@ export default function handleProfileSignup(firstName, lastName, fileName) {
     values.forEach((value) => {
       reArray.push({ status: value.status, value: value.value });
     });
+    return reArray;
   });
 }
