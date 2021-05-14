@@ -3,6 +3,7 @@ export default class Airport {
     this.name = name;
     this.code = code;
   }
+
   set name(newName) {
     if (typeof (newName) !== 'string') {
       throw TypeError('Name must be a string');
@@ -24,6 +25,7 @@ export default class Airport {
   get code() {
     return this._code;
   }
+
   toString() {
     return `[object ${this.code}]`;
   }
