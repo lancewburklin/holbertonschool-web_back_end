@@ -1,14 +1,21 @@
 export default function cleanSet(set, startString) {
-  let newStr = '';
   if (startString === '') {
-    return newStr;
+    return '';
   }
-  set.forEach((x) => {
-    const strSub = x.substr(0, startString.length);
-    if (strSub === startString) {
-      newStr += x.substr(startString.length, x.length - 1);
-      newStr += '-';
+  const ret = [...set].filter((x) => {
+    if (x.substr(0, startString.length) === startString) {
+      return (x.substr(startString.length, x.length));
     }
+    return '';
   });
-  return newStr.slice(0, -1);
+  function reducer(accumulator, currentValue) {
+    let subAcc = '';
+    if (accumulator !== '') {
+      subAcc += '-';
+    }
+    subAcc += currentValue.substr(startString.length, currentValue.length);
+    return accumulator + subAcc;
+  }
+  const res = ret.reduce(reducer, '');
+  return res;
 }
