@@ -6,8 +6,12 @@ const app = (req, res) => {
     res.end('Hello Holberton School!');
   }
   if (req.url === '/students') {
-    res.end('This is the list of our students');
-    countStudents(process.argv[2]).then().catch((error) => { res.send(error); });
+    res.write('This is the list of our students\n');
+    countStudents(process.argv[2]).then((fin) => {
+      res.end(fin);
+    }).catch((error) => {
+      res.end(error);
+    });
   }
 };
 
