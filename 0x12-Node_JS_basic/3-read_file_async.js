@@ -25,14 +25,17 @@ function countStudents(path) {
           }
         }
       }
+      let retString = `Number of students: ${total}\n`;
       console.log(`Number of students: ${total}`);
       for (const key in fields) {
         if (allNames[key]) {
           const fTotal = fields[key];
           console.log(`Number of students in ${key}: ${fTotal}. List: ${allNames[key]}`);
+          retString += `Number of students in ${key}: ${fTotal}. List: ${allNames[key]}\n`;
         }
       }
-      return resolve('Yay');
+      retString = retString.slice(0, -1);
+      return resolve(retString);
     });
   });
 }
