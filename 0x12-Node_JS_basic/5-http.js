@@ -10,7 +10,7 @@ const app = (req, res) => {
     countStudents(process.argv[2]).then((fin) => {
       res.end(fin);
     }).catch((error) => {
-      res.end(error);
+      res.end(String(error));
     });
   }
 };
