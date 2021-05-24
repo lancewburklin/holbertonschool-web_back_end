@@ -7,3 +7,5 @@ const app = (req, res) => {
 
 const server = http.createServer(app);
 server.listen(1245);
+
+module.exports = app;
