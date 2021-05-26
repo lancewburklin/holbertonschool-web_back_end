@@ -17,4 +17,8 @@ describe('calculateNumber', function() {
       res = calculateNumber(.5, .5)
       assert.equal(res, 2);
     });
+    it('...', function(){
+      res = calculateNumber(2, .1)
+      assert.equal(res, 2);
+    });
 });
